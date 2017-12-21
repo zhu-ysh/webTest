@@ -6,93 +6,153 @@
 </head>
 <body>
 <form id="f" action="MyServlet" method="get">
-用户名:<input type="text" name="username" onblur="validName(this)"/> <span id="unsp"></span> <br/>
-密码： <input type="text" name="psd" onblur="validPSD(this)"/> <span id="psdsp"></span><br/>
-确认密码：<input type="text" name="psd2" onblur="validPSD2(this)"/> <span id="psd2sp"></span> <br/>
-手机号:<input type="text" name="phone" onblur="validPhone(this)"/> <span id="phsp"></span> <br/>
-邮箱: <input type="text" name="email" onblur="validEmail(this)"/> <span id="emasp"></span> <br/>
-性别: <input type="radio" name="gender" value="男" id="g1"/>男
-      <input type="radio" name="gender" value="女" id="g2"/>女  <br/>
-    <input type="button" value="提交" onclick="c()"/>
+    <table>
+        <tr>
+            <td>用户名:</td>
+            <td><input type="text" name="username" onblur="validName(this)"/></td>
+            <td id="unsp"></td>
+        </tr>
+        <tr>
+            <td>密码:</td>
+            <td><input id="psd" type="text" name="psd" onblur="validPSD(this)"/></td>
+            <td id="psdsp"></td>
+        </tr>
+        <tr>
+            <td>确认密码:</td>
+            <td><input type="text" name="psd2" onblur="validPSD2(this)"/></td>
+            <td id="psd2sp"></td>
+        </tr>
+        <tr>
+            <td>邮箱: </td>
+            <td><input type="text" name="email" onblur="validEmail(this)"/></td>
+            <td id="emasp"></td>
+        </tr>
+        <tr>
+            <td>手机号:</td>
+            <td><input type="text" name="phone" onblur="validPhone(this)"/></td>
+            <td id="phsp"></td>
+        </tr>
+        <tr>
+            <td>身份证号:</td>
+            <td><input type="text" name="idCard" onblur="valIdCard(this)"/></td>
+            <td id="idCardsp"></td>
+        </tr>
+        <tr>
+            <td>性别: </td>
+            <td>
+                <input type="radio" name="gender" value="男" id="g1"/>男
+                <input type="radio" name="gender" value="女" id="g2"/>女
+            </td>
+            <td id="gendersp"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <textarea rows="3" cols="30" name="text" id="text"></textarea>
+            </td>
+            <td id="resp"></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="button" value="提交" onclick="c()"/>
+            </td>
+        </tr>
+    </table>
 </form>
 <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
 <script>
-    var flag = false;
+    var flag = true;
 
     $("span").css("color","red");
-function validName(inp){
-    var regExp = /^[a-zA-Z_]\w*$/;
-    if(regExp.test(inp.value)){
-       $("#unsp").html("");
-        flag = true;
-    }else{
-        $("#unsp").html("用户不合法");
-        flag = false;
+    function validName(inp){
+        var regExp = /^[a-zA-Z_]\w*$/;
+        if(regExp.test(inp.value)){
+            $("#unsp").html("");
+        }else{
+            $("#unsp").html("用户不合法");
+            flag = false;
+        }
     }
-}
 
-function validPSD(inp){
-    var regExp = new RegExp("^\\d{6,8}$");
-    if(regExp.test(inp.value)){
-        psdsp.innerHTML = "";
-        flag = true;
-    }else{
-        psdsp.innerHTML = "密码不合法";
-        flag = false;
+    function validPSD(inp){
+        var regExp = new RegExp("^\\d{6,8}$");
+        if(regExp.test(inp.value)){
+            psdsp.innerHTML = "";
+        }else{
+            psdsp.innerHTML = "密码不合法";
+            flag = false;
+        }
     }
-}
 
-function validPSD2(inp){
-    var v1 = inp.value;
-    var v2 = psd.value;
-    if(v1 === v2){
-        psd2sp.innerHTML = "";
-        flag = true;
-    }else{
-        psd2sp.innerHTML = "密码必须一致";
-        flag = false;
+    function validPSD2(inp){
+        var v1 = inp.value;
+        var v2 = $("#psd").val();
+        if(v1 === v2){
+            psd2sp.innerHTML = "";
+        }else{
+            psd2sp.innerHTML = "密码必须一致";
+            flag = false;
+        }
     }
-}
 
-function validPhone(inp){
-    var regExp = /^1[356789]\d{9}$/;
-    if(regExp.test(inp.value)){
-        phsp.innerHTML = "";
-        flag = true;
-    }else{
-        phsp.innerHTML = "手机不合法";
-        flag = false;
+    function validPhone(inp){
+        var regExp = /^1[356789]\d{9}$/;
+        if(regExp.test(inp.value)){
+            phsp.innerHTML = "";
+        }else{
+            phsp.innerHTML = "手机号不合法";
+            flag = false;
+        }
     }
-}
 
-function validEmail(inp){
-    var regExp = /^\w{4}@\w{3,}.(com|cn|net|org|edu)$/;
-    if(regExp.test(inp.value)){
-        emasp.innerHTML = "";
-        flag = true;
-    }else{
-        emasp.innerHTML = "邮箱不合法";
-        flag = false;
+    function validEmail(inp){
+        var regExp = /^\w{4}@\w{3,}.(com|cn|net|org|edu)$/;
+        if(regExp.test(inp.value)){
+            emasp.innerHTML = "";
+        }else{
+            emasp.innerHTML = "邮箱不合法";
+            flag = false;
 
+        }
     }
-}
-function validGender(){
-    //checked选中为true,未选中为false
-    if( $('#g1:checked').val() || $('#g2:checked').val()){
-    	flag = true;
-    }else{
-    	alert("性别没选中!!!!!!");
-    	flag = false;
+    function validGender(){
+        //checked选中为true,未选中为false
+        if( $('#g1:checked').val() || $('#g2:checked').val()){
+            flag = true;
+            gendersp.innerHTML = "";
+        }else{
+            gendersp.innerHTML="性别没选中";
+            flag = false;
+        }
     }
-}
-function c() {
-	validGender();
-    if(flag){
-        $("form")[0].submit();
-    }else{
-        alert("信息填写错误,请重新填写");
+    function valIdCard(inp) {
+        var regExp = /(^\d{15}$)|(^\d{17}([0-9]|X)$)/;
+        if(regExp.test(inp.value)){
+            idCardsp.innerHTML = "";
+        }else{
+            idCardsp.innerHTML = "身份号不对";
+            flag = false;
+        }
     }
-}
+
+    function valResume() {
+        var regExp = /^[\s\S]{10,}$/;
+        if(regExp.test($("#text").val())){
+            resp.innerHTML = "";
+        }else{
+            resp.innerHTML = "简介字数太少";
+            flag = false;
+        }
+    }
+
+    function c() {
+        validGender();
+        valResume();
+        if(flag){
+            $("form")[0].submit();
+        }else{
+            alert("信息填写错误,请重新填写");
+        }
+    }
 
 </script>
 </body>
