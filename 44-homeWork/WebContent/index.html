@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="f" action="MyServlet" method="get">
+用户名:<input type="text" name="username" onblur="validName(this)"/> <span id="unsp"></span> <br/>
+密码： <input type="text" name="psd" onblur="validPSD(this)"/> <span id="psdsp"></span><br/>
+确认密码：<input type="text" name="psd2" onblur="validPSD2(this)"/> <span id="psd2sp"></span> <br/>
+手机号:<input type="text" name="phone" onblur="validPhone(this)"/> <span id="phsp"></span> <br/>
+邮箱: <input type="text" name="email" onblur="validEmail(this)"/> <span id="emasp"></span> <br/>
+性别: <input type="radio" name="gender" value="male" id="g1"/>男
+      <input type="radio" name="gender" value="female" id="g2"/>女  <br/>
+    <input type="submit" value="提交"/>
+</form>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    var flag = true;
+
+    $("span").css("color","red");
+function validName(inp){
+    var regExp = /^[a-zA-Z_]\w*$/;
+    if(regExp.test(inp.value)){
+       $("#unsp").html("");
+        flag = true;
+    }else{
+        $("#unsp").html("用户不合法");
+        flag = false;
+    }
+}
+
+function validPSD(inp){
+    var regExp = new RegExp("^\\d{6,8}$");
+    if(regExp.test(inp.value)){
+        psdsp.innerHTML = "";
+        flag = true;
+    }else{
+        psdsp.innerHTML = "密码不合法";
+        flag = false;
+    }
+}
+
+function validPSD2(inp){
+    var v1 = inp.value;
+    var v2 = psd.value;
+    if(v1 === v2){
+        psd2sp.innerHTML = "";
+        flag = true;
+    }else{
+        psd2sp.innerHTML = "密码必须一致";
+        flag = false;
+    }
+}
+
+function validPhone(inp){
+    var regExp = /^1[356789]\d{9}$/;
+    if(regExp.test(inp.value)){
+        phsp.innerHTML = "";
+        flag = true;
+    }else{
+        phsp.innerHTML = "手机不合法";
+        flag = false;
+    }
+}
+
+function validEmail(inp){
+    var regExp = /^\w{4}@\w{3,}.(com|cn|net|org|edu)$/;
+    if(regExp.test(inp.value)){
+        emasp.innerHTML = "";
+        flag = true;
+    }else{
+        emasp.innerHTML = "邮箱不合法";
+        flag = false;
+
+    }
+}
+function validGender(){
+    //checked选中为true,未选中为false
+    if( $('#g1:checked').val() || $('#g2:checked').val()){
+        alert("有选中性别");
+    }else{
+        alert("性别未选中");
+    }
+}
+function c() {
+    if(flag){
+        $("form")[0].submit();
+    }else{
+        alert("!!!");
+    }
+}
+
+</script>
+
+
+</body>
+</html>
