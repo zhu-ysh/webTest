@@ -30,10 +30,15 @@ public class MyServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Enumeration<String> names = request.getParameterNames();
+		String str = "";
 		while(names.hasMoreElements()){
 			String parameterName = names.nextElement();
-			System.out.println(request.getParameter(parameterName));
+			if("psd2".equals(parameterName)){
+			}else {
+				str += request.getParameter(parameterName)+"\t";
+			}
 		}
+		
 	}
 
 	/**
