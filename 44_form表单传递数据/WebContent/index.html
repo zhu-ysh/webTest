@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 
+		get:明文,不安全,效率高,1024byte
+		post:打包,安全,效率低,大小无限制,上传必须使用post
+	 -->
+	 <form action="LoginServlet" method="get">
+	 	用户名:<input type="text" name="username" /><br/>
+	 	密码:<input type="password" name="userpsd"><br/>
+		性别:<input type="radio" name="gender" value="男"/>男
+			<input type="radio" name="gender" value="女"/>女<br/>
+		爱好:<input type="checkbox" name="hobby" value="爬山"/>爬山
+		<input type="checkbox" name="hobby" value="唱歌"/>唱歌
+		<input type="checkbox" name="hobby" value="跳舞"/>跳舞
+		<input type="checkbox" name="hobby" value="游泳"/>游泳<br/>
+		<select name="myCar" multiple="multiple" size="5">
+			<option value="宝马1">宝马1</option>
+			<option value="宝马2">宝马2</option>
+			<option value="宝马3">宝马3</option>
+			<option value="宝马4">宝马4</option>
+			<option value="宝马5">宝马5</option>
+		</select><br/>
+		<input type="submit" value="提交"> 
+	 </form>
+</body>
+</html>
